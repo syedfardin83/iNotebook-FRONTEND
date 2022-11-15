@@ -4,7 +4,7 @@ import NoteItem from './NoteItem';
 
 const Notes = () => {
     const context = useContext(NoteContext);
-    const {notes, setNotes} = context;
+    const {notes, addNote} = context;
     console.log(notes);
   return (
     <>
@@ -12,7 +12,7 @@ const Notes = () => {
     <h2 className="my-5">Your notes</h2>
         {
             notes.map((notes)=>{
-                return <NoteItem notes={notes}/>;
+                return <NoteItem key={notes._id} notes={notes}/>;
             })
         }
     </div>

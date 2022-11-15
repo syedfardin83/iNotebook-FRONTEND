@@ -5,12 +5,14 @@ import Navbar from "./components/Navbar.js";
 import About from "./components/About.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NoteState from "./context/NoteState";
+import Alert from "./components/Alert";
 
 function App() {
   return (
     <>
       <NoteState>
         <div>
+          <Alert msg="This is an amazing MERN project"/>
           <BrowserRouter>
             <Navbar />
             <Routes>

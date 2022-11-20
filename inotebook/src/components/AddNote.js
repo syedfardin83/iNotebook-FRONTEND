@@ -1,38 +1,65 @@
-import React,{useContext} from 'react';
+import React,{useContext, useState} from 'react';
 import NoteContext from "../context/noteContext";
 
 
 const AddNote = () => {
     const context = useContext(NoteContext);
+    // console.log("New context is "+context);
     const {addNote} = context;
+
+    const [note, setNote] = useState({title:"",description:"",tag:"general"});
+    const handleClick = (e)=>{
+        e.preventDefault();
+        addNote(note.title,note.description,note.tag);
+    }
+    const handleChange = (e)=>{
+        setNote({...note,[e.target.name]:[e.target.value]})
+    }
   return (
     <>
     <h2>Add a Note</h2>
 
 <form>
   <div className="mb-3">
-    <label htmlFor="exampleInputEmail1" className="form-label">
-      Email address
+    <label htmlFor="title" className="form-label">
+      Title
     </label>
     <input
-      type="email"
+      type="text"
       className="form-control"
-      id="exampleInputEmail1"
+      id="title"
+      name="title"
+      onChange={handleChange}
       aria-describedby="emailHelp"
     />{" "}
   </div>
   <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">
-      Password
+    <label htmlFor="description" className="form-label">
+      Description
     </label>
     <input
-      type="password"
+      type="text"
       className="form-control"
-      id="exampleInputPassword1"
+      id="description"
+      name="description"
+      onChange={handleChange}
     />
   </div>
-  <button type="submit" className="btn btn-primary">
-    Submit
+  <div className="mb-3">
+    <label htmlFor="title" className="form-label">
+      Tag
+    </label>
+    <input
+      type="text"
+      className="form-control"
+      id="tag"
+      name="tag"
+      onChange={handleChange}
+      aria-describedby="emailHelp"
+    />{" "}
+  </div>
+  <button type="submit" className="btn btn-primary" onClick={handleClick}>
+    Add Note
   </button>
 </form>
     </>

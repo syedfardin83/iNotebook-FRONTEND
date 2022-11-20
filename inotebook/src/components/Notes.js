@@ -1,11 +1,17 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import NoteContext from "../context/noteContext";
 import NoteItem from './NoteItem';
 
 const Notes = () => {
     const context = useContext(NoteContext);
-    const {notes, addNote} = context;
-    console.log(notes);
+    const {notes, getNote} = context;
+
+    // code to fetch all notes from mongo
+    useEffect(() => {
+      getNote();
+    }, []);
+    
+    // console.log(notes);
   return (
     <>
     <div className="container">

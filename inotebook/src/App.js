@@ -6,21 +6,28 @@ import About from "./components/About.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NoteState from "./context/NoteState";
 import Alert from "./components/Alert";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import AlertState from "./context/AlertState";
 
 function App() {
   return (
     <>
       <NoteState>
+        <AlertState>
         <div>
-          <Alert msg="This is an amazing MERN project"/>
           <BrowserRouter>
             <Navbar />
+          <Alert alert={alert}/>
             <Routes>
               <Route path="/about" element={<About />} />
               <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
             </Routes>
           </BrowserRouter>
         </div>
+        </AlertState>
       </NoteState>
     </>
   );

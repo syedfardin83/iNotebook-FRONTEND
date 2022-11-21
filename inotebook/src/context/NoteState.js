@@ -1,6 +1,6 @@
 import NoteContext from "./noteContext";
 import React, { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 
 const NoteState = (props) => {
@@ -66,7 +66,7 @@ const NoteState = (props) => {
         },
         body:JSON.stringify({title,description,tag})
       });
-      const json = response.json();
+      // const json = response.json();
     for (let index = 0; index < notes.length; index++) {
         const element = notes[index];
         if(element._id===id){

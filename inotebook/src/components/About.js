@@ -1,5 +1,5 @@
 import React from 'react';
-import NoteContext from '../context/noteContext';
+// import NoteContext from '../context/noteContext';
 
 const About = () => {
     return (

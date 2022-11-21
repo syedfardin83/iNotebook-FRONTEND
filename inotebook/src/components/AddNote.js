@@ -3,7 +3,7 @@ import NoteContext from "../context/noteContext";
 
 
 const AddNote = () => {
-  const host = 'http://localhost:1212'
+  // const host = 'http://localhost:1212'
     const context = useContext(NoteContext);
     const {addNote} = context;
 

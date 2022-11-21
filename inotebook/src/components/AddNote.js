@@ -3,8 +3,8 @@ import NoteContext from "../context/noteContext";
 
 
 const AddNote = () => {
+  const host = 'http://localhost:1212'
     const context = useContext(NoteContext);
-    // console.log("New context is "+context);
     const {addNote} = context;
 
     const [note, setNote] = useState({title:"",description:"",tag:"general"});
@@ -13,12 +13,11 @@ const AddNote = () => {
         addNote(note.title,note.description,note.tag);
     }
     const handleChange = (e)=>{
-        setNote({...note,[e.target.name]:[e.target.value]})
+        setNote({...note,[e.target.name]:[e.target.value]});
     }
   return (
     <>
     <h2>Add a Note</h2>
-
 <form>
   <div className="mb-3">
     <label htmlFor="title" className="form-label">

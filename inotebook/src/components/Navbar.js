@@ -1,7 +1,16 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+
 
 const Navbar = (props) => {
+  const navigate = useNavigate();
+  const Logout = ()=>{
+    localStorage.removeItem('token');
+    navigate('/login');
+    toast.success('Log out successful');
+  }
   let location = useLocation();
   // location.pathname = "/"
   useEffect(() => {
@@ -55,20 +64,35 @@ const Navbar = (props) => {
                   </Link>
                 </li>
               </ul>
-              <Link to="/login">
-              <button className="btn btn-outline-primary mx-2" type="submit">
-                Login
-              </button>
-              </Link>
-              <Link to="/signup">
-              <button className="btn btn-outline-primary mx-2" type="submit">
-                Sign Up
-              </button>
-              </Link>
+              {!localStorage.getItem("token") ? (
+                <form>
+                  <Link to="/login">
+                    <button
+                      className="btn btn-outline-primary mx-2"
+                      type="submit"
+                    >
+                      Login
+                    </button>
+                  </Link>
+                  <Link to="/signup">
+                    <button
+                      className="btn btn-outline-primary mx-2"
+                      type="submit"
+                    >
+                      Sign Up
+                    </button>
+                  </Link>
+                </form>
+              ) : (
+                <button className="btn btn-outline-primary mx-2" type="submit" onClick={Logout}>
+                  Log out
+                </button>
+              )}
             </div>
           </div>
         </nav>
       </div>
+      <Toaster/>
     </>
   );
 };

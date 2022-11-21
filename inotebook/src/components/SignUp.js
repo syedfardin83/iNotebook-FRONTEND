@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+
 
 const Login = () => {
   const host = "http://localhost:1212";
@@ -27,6 +29,15 @@ const Login = () => {
       console.log('Login Success');
       localStorage.setItem('token',json.authToken);
       navigate("/");
+      toast.success('Signup Successful.');
+    } else {
+      // console.log("Email: "+email);
+      if (email === undefined || password === undefined || name===undefined) {
+        toast.error("Entries cannot be empty.");
+      } else {
+        toast.error(json.msg);
+      }
+      console.log(json);
     }
   }
   const handleChange=(e)=>{
@@ -80,6 +91,7 @@ const Login = () => {
           </button>
         </form>
       </div>
+      <Toaster/>
     </>
   );
 };

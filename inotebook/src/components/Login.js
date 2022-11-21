@@ -1,16 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AlertContext from "../context/alertContext";
+
+// import { ToastContainer, toast } from 'react-toastify';
+//   import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = (props) => {
-    
-    const host = "http://localhost:1212";
-    const [details, setDetails] = useState({ email: "", password: "" });
-    let navigate = useNavigate();
-    
-    const context = useContext(AlertContext);
-    const { showAlert } = context;
-    showAlert('Invalid Cred','success');
+  const host = "http://localhost:1212";
+  const [details, setDetails] = useState({ email: "", password: "" });
+  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,12 +24,19 @@ const Login = (props) => {
     const json = await response.json();
     console.log(json);
     if (json.success) {
-      console.log("Login Success");
-      localStorage.setItem("token", json.authToken);
-      navigate("/");
-    }else{
-        // console.log('Noooooo');
-        // showAlert('Invalid Cred','success')
+      toast.success("Login Succesfull.");
+        console.log("Login Success");
+        localStorage.setItem("token", json.authToken);
+        console.log("auth: "+json.authToken);
+        navigate("/");
+    } else {
+      // console.log("Email: "+email);
+      if (email === undefined || password === undefined) {
+        toast.error("Email or password cannot be empty.");
+      } else {
+        toast.error(json.msg);
+      }
+      console.log(json);
     }
   };
 
@@ -74,6 +79,8 @@ const Login = (props) => {
           </button>
         </form>
       </div>
+      {/* <ToastContainer/> */}
+      <Toaster />
     </>
   );
 };
